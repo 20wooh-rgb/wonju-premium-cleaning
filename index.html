@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>원주 프리미엄 클리닝</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#0f1626;
+      --panel2:#0c1322;
+      --text:#e7eefc;
+      --muted:#aab8d6;
+      --line:rgba(255,255,255,.08);
+      --accent:#4f7cff;
+      --accent2:#2ee59d;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(79,124,255,.18), transparent 60%),
+                  radial-gradient(900px 700px at 80% 20%, rgba(46,229,157,.14), transparent 60%),
+                  linear-gradient(180deg, #070b12 0%, #0b1020 50%, #070b12 100%);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,10,18,.6);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:1100px;margin:0 auto;padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .dot{width:14px;height:14px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(79,124,255,.12);
+    }
+    nav{display:flex; gap:18px; flex-wrap:wrap; align-items:center; justify-content:center}
+    nav a{color:var(--muted); font-weight:650; font-size:14px}
+    nav a:hover{color:var(--text)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:750;
+      font-size:14px;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .btn:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(79,124,255,.95), rgba(79,124,255,.55));
+      border-color: rgba(79,124,255,.35);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card.pad{padding:18px}
+    .kicker{display:flex; gap:10px; align-items:center; color:var(--muted); font-weight:650; font-size:13px}
+    .kdot{width:8px;height:8px;border-radius:50%;background: var(--accent2); box-shadow: 0 0 0 6px rgba(46,229,157,.10)}
+    h1{
+      margin:14px 0 10px;
+      font-size:44px; line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    @media (max-width: 520px){ h1{font-size:34px} }
+    .lead{color:var(--muted); line-height:1.65; font-size:15px; margin:0 0 16px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12.5px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .section-title{
+      margin:26px 0 10px;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){ .services{grid-template-columns:1fr} }
+    .svc{
+      padding:14px 14px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .svc .t{display:flex; gap:10px; align-items:center; font-weight:850}
+    .svc .t span{font-size:13px; color:var(--muted); font-weight:800; border:1px solid var(--line); padding:4px 9px; border-radius:999px}
+    .svc p{margin:10px 0 0; color:var(--muted); line-height:1.6; font-size:13.5px}
+    .split{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
+
+    /* ===== Gallery slider ===== */
+    .slider{
+      padding:16px;
+    }
+    .slider-head{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:6px 10px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:12.5px;
+      font-weight:750;
+    }
+    .navbtns{display:flex; gap:8px; align-items:center}
+    .iconbtn{
+      width:38px;height:38px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      cursor:pointer;
+      display:grid; place-items:center;
+      transition:.15s ease;
+    }
+    .iconbtn:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .frame{
+      position:relative;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      aspect-ratio: 16 / 9;
+    }
+    .frame img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+    }
+    .caption{
+      position:absolute;
+      left:12px; bottom:12px;
+      background: rgba(10,14,24,.65);
+      border:1px solid rgba(255,255,255,.12);
+      padding:8px 10px;
+      border-radius:12px;
+      backdrop-filter: blur(8px);
+      max-width: 85%;
+    }
+    .caption .small{color:var(--muted); font-size:12px; font-weight:750}
+    .caption .name{margin-top:3px; font-size:13.5px; font-weight:850}
+    .thumbs{
+      margin-top:10px;
+      display:flex; gap:8px;
+      overflow:auto;
+      padding-bottom:4px;
+    }
+    .thumb{
+      flex: 0 0 auto;
+      width:78px; height:46px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      cursor:pointer;
+      opacity:.7;
+      transition:.12s ease;
+      background: rgba(255,255,255,.02);
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{opacity:1; outline:2px solid rgba(79,124,255,.55); outline-offset:2px}
+    .dots{
+      display:flex; gap:6px; justify-content:center; margin-top:10px;
+    }
+    .dot2{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.22);
+    }
+    .dot2.active{background: rgba(79,124,255,.95)}
+    .hint{color:var(--muted); font-size:12.5px; margin-top:10px; line-height:1.5}
+
+    /* ===== Clients ===== */
+    .clients-head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .clients-head p{margin:6px 0 0; color:var(--muted); font-size:13.2px; line-height:1.6}
+    .toggle{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:850;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .clients-grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 900px){ .clients-grid{grid-template-columns:1fr} }
+    .client-card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px;
+      display:flex; flex-direction:column; gap:8px;
+      min-height: 84px;
+    }
+    .client-top{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .client-name{
+      font-weight:900;
+      letter-spacing:-.01em;
+      font-size:14px;
+      line-height:1.2;
+    }
+    .tag{
+      font-size:12px;
+      font-weight:900;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .tag.hospital{border-color: rgba(79,124,255,.30); color: rgba(192,210,255,.95)}
+    .tag.fin{border-color: rgba(46,229,157,.30); color: rgba(185,255,230,.95)}
+    .tag.company{border-color: rgba(255,255,255,.16); color: rgba(230,236,252,.85)}
+    .tag.building{border-color: rgba(255,200,87,.25); color: rgba(255,230,180,.95)}
+    .tag.logistics{border-color: rgba(255,121,198,.25); color: rgba(255,205,235,.95)}
+    .client-sub{
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.5;
+    }
+
+    /* ===== Contact ===== */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+    @media (max-width: 900px){ .contact{grid-template-columns:1fr} }
+    .contact .big{
+      font-size:22px;
+      font-weight:950;
+      letter-spacing:-.02em;
+      margin:10px 0 6px;
+    }
+    .contact .small{
+      color:var(--muted);
+      font-size:13.2px;
+      line-height:1.6;
+      margin:0;
+    }
+    .footer{
+      margin-top:26px;
+      color: rgba(170,184,214,.8);
+      font-size:12.5px;
+      text-align:center;
+    }
+    .mini{
+      color:rgba(170,184,214,.85);
+      font-size:12.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>원주 프리미엄 클리닝</span>
+      </div>
+      <nav>
+        <a href="#services">서비스</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#clients">거래처 일부</a>
+        <a href="#contact">문의</a>
+      </nav>
+      <div class="cta">
+        <a class="btn primary" href="tel:010-2063-9495">전화문의</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="grid">
+      <div class="card pad">
+        <div class="kicker"><span class="kdot"></span><span>원주 사무실·병원 정기청소 / 입주청소 / 바닥관리</span></div>
+        <h1>티 나지 않게,<br/>매일 관리된 공간처럼</h1>
+        <p class="lead">
+          직원이 출근했을 때 “이미 깨끗한 상태”로 시작하도록, 바닥·먼지·동선·화장실까지
+          기본이 탄탄한 정기청소를 합니다.
+        </p>
+        <div class="cta" style="margin-top:10px">
+          <a class="btn primary" href="tel:010-2063-9495">견적 문의하기</a>
+          <a class="btn" href="#gallery">작업 사진 보기</a>
+        </div>
+        <div class="pillrow">
+          <span class="pill">정기청소 전문</span>
+          <span class="pill">사무실·병원 동선 이해</span>
+          <span class="pill">바닥 디테일 관리</span>
+          <span class="pill">원주 지역 책임 운영</span>
+        </div>
+      </div>
+
+      <!-- Gallery preview card -->
+      <div class="card slider" id="gallery">
+        <div class="slider-head">
+          <div class="badge">현장 사진 (실사)</div>
+          <div class="navbtns">
+            <button class="iconbtn" id="prevBtn" aria-label="이전">‹</button>
+            <button class="iconbtn" id="nextBtn" aria-label="다음">›</button>
+          </div>
+        </div>
+
+        <div class="frame">
+          <img id="mainImg" src="사진/photo01.jpg" alt="현장 사진" />
+          <div class="caption">
+            <div class="small" id="capSmall">사무실 청소 작업 사진</div>
+            <div class="name" id="capName">photo01.jpg</div>
+          </div>
+        </div>
+
+        <div class="thumbs" id="thumbs"></div>
+        <div class="dots" id="dots"></div>
+
+        <div class="hint">※ “Before/After”가 아니라, 실제 유지관리 느낌을 보여드리는 현장 실사입니다.</div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-title">서비스</div>
+      <div class="services">
+        <div class="svc">
+          <div class="t">사무실 정기청소 <span>정기</span></div>
+          <p>바닥·책상 주변·공용공간·휴게공간을 동선 기준으로 정리해 쌓이지 않게 관리합니다.</p>
+        </div>
+        <div class="svc">
+          <div class="t">병원·의원 청소 <span>동선</span></div>
+          <p>대기실/진료실/복도/화장실 등 고객 동선에 맞춰 “깔끔함이 유지되는 느낌”을 만듭니다.</p>
+        </div>
+        <div class="svc">
+          <div class="t">입주청소·바닥관리 <span>세팅</span></div>
+          <p>초도 청소(처음 세팅) + 정기관리로 연결해 공간 컨디션을 안정적으로 유지합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTS + CONTACT -->
+    <section class="split">
+      <div class="card pad" id="clients">
+        <div class="clients-head">
+            <div class="section-title" style="margin:0">거래처 일부</div>
+          </div>
+          <button class="toggle" id="toggleClients">눌러서 펼치기</button>
+        </div>
+
+        <div class="clients-grid" id="clientsGrid" style="display:none"></div>
+
+      <div class="card pad" id="contact">
+        <div class="section-title" style="margin:0">문의</div>
+        <div class="contact">
+          <div class="svc" style="margin:0">
+            <div class="t">원주 프리미엄 클리닝 <span>상담</span></div>
+            <div class="big">010-2063-9495</div>
+            <p class="small">방문 견적 또는 사진(면도)으로도 상담 가능합니다.</p>
+            <div class="cta" style="margin-top:12px">
+              <a class="btn primary" href="tel:010-2063-9495">지금 전화하기</a>
+              <a class="btn" href="#gallery">갤러리 다시보기</a>
+            </div>
+          </div>
+          <div class="svc" style="margin:0">
+            <div class="t">빠른 견적을 위해 <span>3가지</span></div>
+            <p class="small" style="margin-top:10px">
+              아래 3가지만 알려주시면 더 빠릅니다.<br/><br/>
+              • 공간 종류(사무실/병원/상가 등) + 대략 면적<br/>
+              • 청소 주기(주 1~3회 등) + 희망 시간대<br/>
+              • 특이사항(화장실/계단/유리창/초도청소 필요 여부)
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© 원주 프리미엄 클리닝. All rights reserved.</div>
+  </main>
+
+  <script>
+    /* =========================
+       1) 갤러리 (슬라이드)
+       - photo01.jpg ~ photo08.jpg 를 기본으로 사용
+       ========================= */
+    const GALLERY = [
+      {src:"사진/photo01.jpg", small:"사무실 청소 작업 사진", name:"photo01.jpg"},
+      {src:"사진/photo02.jpg", small:"사무실/회의실 공간", name:"photo02.jpg"},
+      {src:"사진/photo03.jpg", small:"바닥·동선 유지관리", name:"photo03.jpg"},
+      {src:"사진/photo04.jpg", small:"현장 작업 사진", name:"photo04.jpg"},
+      {src:"사진/photo05.jpg", small:"현장 작업 사진", name:"photo05.jpg"},
+      {src:"사진/photo06.jpg", small:"현장 작업 사진", name:"photo06.jpg"},
+      {src:"사진/photo07.jpg", small:"현장 작업 사진", name:"photo07.jpg"},
+      {src:"사진/photo08.jpg", small:"현장 작업 사진", name:"photo08.jpg"},
+    ];
+
+    let idx = 0;
+    const mainImg = document.getElementById("mainImg");
+    const capSmall = document.getElementById("capSmall");
+    const capName = document.getElementById("capName");
+    const thumbs = document.getElementById("thumbs");
+    const dots = document.getElementById("dots");
+
+    function renderThumbs(){
+      thumbs.innerHTML = "";
+      dots.innerHTML = "";
+      GALLERY.forEach((g, i) => {
+        const t = document.createElement("div");
+        t.className = "thumb" + (i===idx ? " active":"");
+        t.innerHTML = `<img src="${g.src}" alt="썸네일 ${i+1}">`;
+        t.addEventListener("click", ()=> setSlide(i));
+        thumbs.appendChild(t);
+
+        const d = document.createElement("div");
+        d.className = "dot2" + (i===idx ? " active":"");
+        d.addEventListener("click", ()=> setSlide(i));
+        dots.appendChild(d);
+      });
+    }
+
+    function setSlide(i){
+      idx = (i + GALLERY.length) % GALLERY.length;
+      const g = GALLERY[idx];
+      mainImg.src = g.src;
+      capSmall.textContent = g.small;
+      capName.textContent = g.name;
+      renderThumbs();
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", ()=> setSlide(idx-1));
+    document.getElementById("nextBtn").addEventListener("click", ()=> setSlide(idx+1));
+
+    // 자동 슬라이드(원하면 꺼도 됨)
+    let auto = setInterval(()=> setSlide(idx+1), 4500);
+    mainImg.addEventListener("mouseenter", ()=> clearInterval(auto));
+    mainImg.addEventListener("mouseleave", ()=> auto = setInterval(()=> setSlide(idx+1), 4500));
+
+    /* =========================
+       2) 거래처 일부: 자연스러운 마스킹 + 업종 태그
+       ========================= */
+
+    // ✅ 마스킹: 길이별 자연화
+    // - 2~3글자: 첫 글자만 노출 (예: "유림" -> "유○")
+    // - 4~5글자: 앞 1 + 뒤 1 노출 (예: "유림빌딩" -> "유○○딩")
+    // - 6글자 이상: 앞 2 + 뒤 1 노출 (예: "지성정형외과" -> "지성○○○과")
+    function maskNameNatural(name){
+      const s = String(name || "").trim();
+      const n = s.length;
+      if (n <= 1) return s;
+
+      if (n <= 3) {
+        return s[0] + "○".repeat(n-1);
+      }
+      if (n <= 5) {
+        return s[0] + "○".repeat(n-2) + s[n-1];
+      }
+      return s.slice(0,2) + "○".repeat(n-3) + s[n-1];
+    }
+
+    // ✅ 업종 분류(키워드 기반)
+    function classifyType(name){
+      const s = String(name || "");
+
+      // 병원/의원/의학
+      if (/(병원|의원|정형외과|내과|피부과|안과|산부인과|한의원)/.test(s)) return {label:"병원", cls:"hospital", note:"의료기관 정기/특수 동선 관리"};
+
+      // 치과
+      if (/(치과)/.test(s)) return {label:"치과", cls:"hospital", note:"대기실·진료실·화장실 중심 관리"};
+
+      // 금융(금고/협동조합)
+      if (/(새마을금고|신용협동조합|농협|수협|금고|협동조합)/.test(s)) return {label:"금융", cls:"fin", note:"고객 응대 공간 위주 깔끔 유지"};
+
+      // 카페/프랜차이즈
+      if (/(투썸|커피|카페)/.test(s)) return {label:"카페", cls:"company", note:"바닥·테이블·동선 중심 관리"};
+
+      // 아파트/빌라/주거단지
+      if (/(아파트|빌라|주공|주택|오피스텔)/.test(s)) return {label:"주거", cls:"building", note:"공용부/계단/현관 동선 관리"};
+
+      // 빌딩
+      if (/(빌딩)/.test(s)) return {label:"빌딩", cls:"building", note:"공용부 중심 관리"};
+
+      // 물류
+      if (/(로지스|물류|센터)/.test(s)) return {label:"물류", cls:"logistics", note:"넓은 바닥·먼지 관리"};
+
+      // (주), 주식회사 등 기업
+      if (/(주식회사|\(주\)|회사|산업|코앤코|공간산업)/.test(s)) return {label:"기업", cls:"company", note:"사무실/창고 혼합 동선 관리"};
+
+      // 기본
+      return {label:"관리", cls:"company", note:"공간 특성에 맞춘 정기관리"};
+    }
+
+    // ✅ 풀네임 그대로 입력 (화면에는 자동 마스킹)
+    const CLIENTS_FULL = [
+      "지성정형외과",
+      "부론제일병원",
+      "다람쥐키즈치과",
+      "코앤코주식회사",
+      "공간산업주식회사",
+      "유림빌딩",
+      "MG새마을금고본점",
+      "신용협동조합본점",
+      "투썸플레이스지점",
+      "예가채빌라아파트",
+      "성우아파트",
+      "센트럴로지스",
+      "서울니어치과",
+      "유디치과지점",
+      "산림협동조합본점"
+    ];
+
+    function renderClients(){
+      const grid = document.getElementById("clientsGrid");
+      grid.innerHTML = "";
+
+      CLIENTS_FULL.forEach((full) => {
+        const masked = maskNameNatural(full);
+        const type = classifyType(full);
+
+        const el = document.createElement("div");
+        el.className = "client-card";
+        el.innerHTML = `
+          <div class="client-top">
+            <div class="client-name">${masked}</div>
+            <div class="tag ${type.cls}">${type.label}</div>
+          </div>
+          <div class="client-sub">${type.note}</div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    // 접기/펼치기
+    const toggleBtn = document.getElementById("toggleClients");
+    const clientsGrid = document.getElementById("clientsGrid");
+    let opened = false;
+    toggleBtn.addEventListener("click", () => {
+      opened = !opened;
+      clientsGrid.style.display = opened ? "grid" : "none";
+      toggleBtn.textContent = opened ? "눌러서 접기" : "눌러서 펼치기";
+    });
+
+    // 초기 렌더
+    document.addEventListener("DOMContentLoaded", () => {
+      setSlide(0);
+      renderClients();
+    });
+  </script>
+</body>
+</html>
