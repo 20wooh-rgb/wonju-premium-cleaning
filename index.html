@@ -1,309 +1,310 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>원주 프리미엄 클리닝</title>
+  <meta name="description" content="원주 프리미엄 클리닝 - 병원·사무실·빌라·아파트 공용부 정기청소 / 입주청소 / 특수청소" />
+
   <style>
     :root{
-      --bg:#0b0f17;
-      --panel:#0f1626;
-      --panel2:#0c1322;
-      --text:#e7eefc;
-      --muted:#aab8d6;
-      --line:rgba(255,255,255,.08);
-      --accent:#4f7cff;
-      --accent2:#2ee59d;
-      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --bg:#0b1020;
+      --card:#111a33;
+      --card2:#0f1730;
+      --text:#eaf0ff;
+      --muted:#b7c3e6;
+      --accent:#7aa2ff;
+      --accent2:#22c55e;
+      --danger:#ff5a7a;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.45);
       --radius:18px;
     }
+
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 20% 10%, rgba(79,124,255,.18), transparent 60%),
-                  radial-gradient(900px 700px at 80% 20%, rgba(46,229,157,.14), transparent 60%),
-                  linear-gradient(180deg, #070b12 0%, #0b1020 50%, #070b12 100%);
-      color:var(--text);
-    }
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;background:radial-gradient(1000px 600px at 20% 10%, rgba(122,162,255,.22), transparent 60%), radial-gradient(900px 700px at 80% 20%, rgba(34,197,94,.18), transparent 60%), var(--bg); color:var(--text);}
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 16px 70px}
+
+    /* Header */
     .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(7,10,18,.6);
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(to bottom, rgba(11,16,32,.86), rgba(11,16,32,.60));
       border-bottom:1px solid var(--line);
     }
-    .topbar-inner{
-      max-width:1100px;margin:0 auto;padding:14px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    .topbar-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(122,162,255,.95), rgba(34,197,94,.75));
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      display:grid;place-items:center;font-weight:900;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-    .dot{width:14px;height:14px;border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 6px rgba(79,124,255,.12);
-    }
-    nav{display:flex; gap:18px; flex-wrap:wrap; align-items:center; justify-content:center}
-    nav a{color:var(--muted); font-weight:650; font-size:14px}
-    nav a:hover{color:var(--text)}
-    .cta{
-      display:flex; gap:10px; align-items:center;
-    }
-    .btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:750;
-      font-size:14px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .btn:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(79,124,255,.95), rgba(79,124,255,.55));
-      border-color: rgba(79,124,255,.35);
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .9fr;
-      gap:18px;
-      margin-top:18px;
-    }
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .card.pad{padding:18px}
-    .kicker{display:flex; gap:10px; align-items:center; color:var(--muted); font-weight:650; font-size:13px}
-    .kdot{width:8px;height:8px;border-radius:50%;background: var(--accent2); box-shadow: 0 0 0 6px rgba(46,229,157,.10)}
-    h1{
-      margin:14px 0 10px;
-      font-size:44px; line-height:1.05;
-      letter-spacing:-.02em;
-    }
-    @media (max-width: 520px){ h1{font-size:34px} }
-    .lead{color:var(--muted); line-height:1.65; font-size:15px; margin:0 0 16px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .brand h1{font-size:16px;margin:0;line-height:1.1}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .pill{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12.5px;
-      color:var(--muted);
-      font-weight:700;
+      background:rgba(255,255,255,.04);
+      padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted);
+      transition:transform .15s ease, background .15s ease;
+      display:flex;gap:7px;align-items:center;
     }
-    .section-title{
-      margin:26px 0 10px;
-      font-size:18px;
-      letter-spacing:-.01em;
+    .pill:hover{transform:translateY(-1px);background:rgba(255,255,255,.06);color:var(--text)}
+    .cta{
+      background:linear-gradient(135deg, rgba(122,162,255,.95), rgba(122,162,255,.55));
+      border:1px solid rgba(122,162,255,.35);
+      color:#071022;
+      font-weight:800;
     }
-    .services{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 900px){ .services{grid-template-columns:1fr} }
-    .svc{
-      padding:14px 14px 16px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .svc .t{display:flex; gap:10px; align-items:center; font-weight:850}
-    .svc .t span{font-size:13px; color:var(--muted); font-weight:800; border:1px solid var(--line); padding:4px 9px; border-radius:999px}
-    .svc p{margin:10px 0 0; color:var(--muted); line-height:1.6; font-size:13.5px}
-    .split{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      margin-top:18px;
-    }
-    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
+    .cta:hover{background:linear-gradient(135deg, rgba(122,162,255,1), rgba(34,197,94,.55));}
 
-    /* ===== Gallery slider ===== */
-    .slider{
-      padding:16px;
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(17,26,51,.90), rgba(15,23,48,.88));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
     }
-    .slider-head{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      margin-bottom:10px;
+    .hero-left{padding:22px 22px 18px;position:relative;overflow:hidden}
+    .hero-left:before{
+      content:"";
+      position:absolute;inset:-160px -200px auto auto;
+      width:420px;height:420px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(122,162,255,.55), rgba(122,162,255,0) 60%);
+      filter:blur(0px);
+      pointer-events:none;
     }
     .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:6px 10px;
-      border-radius:999px;
-      color:var(--muted);
-      font-size:12.5px;
-      font-weight:750;
+      display:inline-flex;gap:8px;align-items:center;
+      background:rgba(34,197,94,.15);
+      border:1px solid rgba(34,197,94,.25);
+      color:#d8ffe7;
+      padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;
     }
-    .navbtns{display:flex; gap:8px; align-items:center}
-    .iconbtn{
-      width:38px;height:38px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      cursor:pointer;
-      display:grid; place-items:center;
-      transition:.15s ease;
-    }
-    .iconbtn:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18)}
-    .frame{
-      position:relative;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.25);
-      overflow:hidden;
-      aspect-ratio: 16 / 9;
-    }
-    .frame img{
-      width:100%; height:100%;
-      object-fit: cover;
-      display:block;
-      transform: scale(1.02);
-    }
-    .caption{
-      position:absolute;
-      left:12px; bottom:12px;
-      background: rgba(10,14,24,.65);
-      border:1px solid rgba(255,255,255,.12);
-      padding:8px 10px;
-      border-radius:12px;
-      backdrop-filter: blur(8px);
-      max-width: 85%;
-    }
-    .caption .small{color:var(--muted); font-size:12px; font-weight:750}
-    .caption .name{margin-top:3px; font-size:13.5px; font-weight:850}
-    .thumbs{
-      margin-top:10px;
-      display:flex; gap:8px;
-      overflow:auto;
-      padding-bottom:4px;
-    }
-    .thumb{
-      flex: 0 0 auto;
-      width:78px; height:46px;
-      border-radius:10px;
-      border:1px solid var(--line);
-      overflow:hidden;
-      cursor:pointer;
-      opacity:.7;
-      transition:.12s ease;
-      background: rgba(255,255,255,.02);
-    }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .thumb.active{opacity:1; outline:2px solid rgba(79,124,255,.55); outline-offset:2px}
-    .dots{
-      display:flex; gap:6px; justify-content:center; margin-top:10px;
-    }
-    .dot2{
-      width:8px;height:8px;border-radius:999px;
-      background: rgba(255,255,255,.22);
-    }
-    .dot2.active{background: rgba(79,124,255,.95)}
-    .hint{color:var(--muted); font-size:12.5px; margin-top:10px; line-height:1.5}
-
-    /* ===== Clients ===== */
-    .clients-head{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-    }
-    .clients-head p{margin:6px 0 0; color:var(--muted); font-size:13.2px; line-height:1.6}
-    .toggle{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      padding:9px 12px;
-      border-radius:999px;
-      font-weight:850;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .clients-grid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-    }
-    @media (max-width: 900px){ .clients-grid{grid-template-columns:1fr} }
-    .client-card{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+    .hero-left h2{margin:14px 0 8px;font-size:30px;line-height:1.15}
+    .hero-left p{margin:0 0 14px;color:var(--muted);line-height:1.65}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn{
       border-radius:14px;
-      padding:12px;
-      display:flex; flex-direction:column; gap:8px;
-      min-height: 84px;
-    }
-    .client-top{
-      display:flex; align-items:center; justify-content:space-between; gap:8px;
-    }
-    .client-name{
-      font-weight:900;
-      letter-spacing:-.01em;
-      font-size:14px;
-      line-height:1.2;
-    }
-    .tag{
-      font-size:12px;
-      font-weight:900;
-      padding:5px 10px;
-      border-radius:999px;
+      padding:12px 14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--muted);
-      white-space:nowrap;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      display:inline-flex;align-items:center;gap:10px;
+      font-weight:800;font-size:14px;
+      transition:transform .15s ease, background .15s ease;
     }
-    .tag.hospital{border-color: rgba(79,124,255,.30); color: rgba(192,210,255,.95)}
-    .tag.fin{border-color: rgba(46,229,157,.30); color: rgba(185,255,230,.95)}
-    .tag.company{border-color: rgba(255,255,255,.16); color: rgba(230,236,252,.85)}
-    .tag.building{border-color: rgba(255,200,87,.25); color: rgba(255,230,180,.95)}
-    .tag.logistics{border-color: rgba(255,121,198,.25); color: rgba(255,205,235,.95)}
-    .client-sub{
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(34,197,94,.88), rgba(34,197,94,.45));
+      border:1px solid rgba(34,197,94,.30);
+      color:#06110a;
+    }
+    .btn.primary:hover{background:linear-gradient(135deg, rgba(34,197,94,1), rgba(122,162,255,.45));}
+
+    /* Side cards */
+    .hero-right{display:grid;grid-template-rows:auto auto;gap:16px}
+    .mini{padding:16px}
+    .mini h3{margin:0 0 8px;font-size:16px}
+    .mini ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+    .mini li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);
       color:var(--muted);
-      font-size:12.5px;
-      line-height:1.5;
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:5px;flex:0 0 10px}
+    .contactbox{
+      padding:16px;display:flex;flex-direction:column;gap:10px
+    }
+    .phone{
+      font-size:18px;font-weight:900;
+      padding:12px 12px;border-radius:16px;
+      background:rgba(122,162,255,.12);
+      border:1px solid rgba(122,162,255,.25);
+      display:flex;justify-content:space-between;align-items:center
+    }
+    .small{color:var(--muted);font-size:13px;line-height:1.5}
+
+    /* Sections */
+    .section-title{margin:26px 0 12px;font-size:18px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .service{padding:16px}
+    .service h4{margin:0 0 6px}
+    .service p{margin:0;color:var(--muted);line-height:1.55}
+    .tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .tag{
+      font-size:12px;color:var(--muted);
+      border:1px dashed rgba(255,255,255,.18);
+      padding:6px 8px;border-radius:999px
     }
 
-    /* ===== Contact ===== */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      margin-top:18px;
+    /* Gallery (featured) */
+    .gallery-wrap{padding:16px}
+    .gallery-top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+    .gallery-top p{margin:0;color:var(--muted);font-size:13px}
+    .gallery{
+      margin-top:12px;
+      display:grid;grid-template-columns:1.2fr .8fr;gap:12px;
     }
-    @media (max-width: 900px){ .contact{grid-template-columns:1fr} }
-    .contact .big{
-      font-size:22px;
-      font-weight:950;
-      letter-spacing:-.02em;
-      margin:10px 0 6px;
+    .frame{
+      border-radius:18px;overflow:hidden;border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      position:relative;
     }
-    .contact .small{
+    .frame img{width:100%;height:100%;object-fit:cover;display:block}
+    .caption{
+      position:absolute;left:10px;right:10px;bottom:10px;
+      padding:10px 12px;border-radius:14px;
+      background:rgba(11,16,32,.65);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      backdrop-filter:blur(10px);
+      display:flex;justify-content:space-between;gap:10px;align-items:center;
+      font-size:13px;
+    }
+    .thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .thumb{border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:pointer;position:relative}
+    .thumb img{width:100%;height:140px;object-fit:cover;display:block;filter:saturate(1.05)}
+    .thumb:after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.18), transparent 50%);
+      opacity:.85;
+    }
+
+    /* Clients */
+    .clients{padding:16px}
+    .clientlist{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      font-size:13px;
+      padding:9px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
       color:var(--muted);
-      font-size:13.2px;
-      line-height:1.6;
-      margin:0;
+      display:flex;gap:8px;align-items:center;
     }
-    .footer{
-      margin-top:26px;
-      color: rgba(170,184,214,.8);
-      font-size:12.5px;
-      text-align:center;
+    .chip b{color:var(--text);font-weight:900}
+
+    /* Footer */
+    footer{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6}
+
+    /* Full gallery */
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .fbtn{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:13px;
+      cursor:pointer;
+      user-select:none
     }
-    .mini{
-      color:rgba(170,184,214,.85);
-      font-size:12.5px;
+    .fbtn.active{
+      background:rgba(122,162,255,.22);
+      border-color:rgba(122,162,255,.35)
+    }
+    .fullgrid{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px
+    }
+    .gitem{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      cursor:pointer
+    }
+    .gitem img{width:100%;height:160px;object-fit:cover;display:block}
+    .gmeta{
+      position:absolute;left:10px;right:10px;bottom:10px;
+      display:flex;justify-content:space-between;gap:8px;align-items:center;
+      padding:8px 10px;border-radius:12px;
+      background:rgba(11,16,32,.62);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+      font-size:12px;color:var(--text)
+    }
+    .gmeta .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+    .gmeta .c{
+      font-weight:900;
+      color:#dbe7ff;
+      background:rgba(122,162,255,.18);
+      border:1px solid rgba(122,162,255,.24);
+      padding:4px 8px;border-radius:999px;
+      white-space:nowrap
+    }
+    .lightbox{
+      position:fixed;inset:0;z-index:999;
+      background:rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .lightbox.open{display:flex}
+    .lb-card{
+      width:min(1040px, 96vw);
+      max-height:90vh;
+      background:linear-gradient(180deg, rgba(17,26,51,.96), rgba(15,23,48,.96));
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+    }
+    .lb-top{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:12px 14px;border-bottom:1px solid var(--line);
+      gap:10px
+    }
+    .lb-title{font-weight:900}
+    .lb-close{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:8px 10px;border-radius:12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .lb-imgwrap{background:rgba(0,0,0,.25);display:grid;place-items:center}
+    .lb-imgwrap img{max-width:100%;max-height:72vh;object-fit:contain;display:block}
+    .lb-bottom{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      padding:12px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px
+    }
+    .lb-nav{display:flex;gap:8px}
+    .lb-nav button{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:8px 10px;border-radius:12px;
+      cursor:pointer;font-weight:900;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr; }
+      .gallery{grid-template-columns:1fr}
+      .thumbs{grid-template-columns:repeat(4,1fr)}
+      .thumb img{height:110px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .fullgrid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width: 640px){
+      .hero-left h2{font-size:24px}
+      .thumbs{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:1fr}
+      .topbar-inner{flex-direction:column;align-items:flex-start}
+      .nav{width:100%;justify-content:flex-start}
+      .fullgrid{grid-template-columns:repeat(2,1fr)}
+      .gitem img{height:140px}
     }
   </style>
 </head>
@@ -312,292 +313,351 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <span class="dot"></span>
-        <span>원주 프리미엄 클리닝</span>
+        <div class="logo">W</div>
+        <div>
+          <h1>원주 프리미엄 클리닝</h1>
+          <p>병원 · 치과 · 사무실 · 빌라 · 아파트 공용부 전문</p>
+        </div>
       </div>
-      <nav>
-        <a href="#services">서비스</a>
-        <a href="#gallery">갤러리</a>
-        <a href="#clients">거래처 일부</a>
-        <a href="#contact">문의</a>
+      <nav class="nav">
+        <a class="pill" href="#services">서비스</a>
+        <a class="pill" href="#gallery">대표 갤러리</a>
+        <a class="pill" href="#full-gallery">갤러리 전체</a>
+        <a class="pill" href="#clients">거래처</a>
+        <a class="pill cta" href="tel:010-2063-9495">📞 010-2063-9495</a>
       </nav>
-      <div class="cta">
-        <a class="btn primary" href="tel:010-2063-9495">전화문의</a>
-      </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- HERO -->
-    <section class="grid">
-      <div class="card pad">
-        <div class="kicker"><span class="kdot"></span><span>원주 사무실·병원 정기청소 / 입주청소 / 바닥관리</span></div>
-        <h1>티 나지 않게,<br/>매일 관리된 공간처럼</h1>
-        <p class="lead">
-          직원이 출근했을 때 “이미 깨끗한 상태”로 시작하도록, 바닥·먼지·동선·화장실까지
-          기본이 탄탄한 정기청소를 합니다.
+    <section class="hero">
+      <div class="card hero-left">
+        <span class="badge">✅ 원주 지역 정기청소 · 빠른 상담</span>
+        <h2>눈에 보이는 “깨끗함”을 넘어서<br/>현장 기준으로 관리합니다.</h2>
+        <p>
+          병원·치과·사무실·빌라·아파트 공용부까지, <b>현장 동선과 오염 패턴</b>을 기준으로
+          체크리스트를 만들고 관리합니다. 약속된 시간, 약속된 품질로 꾸준히 들어갑니다.
         </p>
-        <div class="cta" style="margin-top:10px">
-          <a class="btn primary" href="tel:010-2063-9495">견적 문의하기</a>
-          <a class="btn" href="#gallery">작업 사진 보기</a>
-        </div>
-        <div class="pillrow">
-          <span class="pill">정기청소 전문</span>
-          <span class="pill">사무실·병원 동선 이해</span>
-          <span class="pill">바닥 디테일 관리</span>
-          <span class="pill">원주 지역 책임 운영</span>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="tel:010-2063-9495">📞 전화 상담하기</a>
+          <a class="btn" href="#gallery">📷 작업 사진 보기</a>
+          <a class="btn" href="#services">🧽 서비스 확인</a>
         </div>
       </div>
 
-      <!-- Gallery preview card -->
-      <div class="card slider" id="gallery">
-        <div class="slider-head">
-          <div class="badge">현장 사진 (실사)</div>
-          <div class="navbtns">
-            <button class="iconbtn" id="prevBtn" aria-label="이전">‹</button>
-            <button class="iconbtn" id="nextBtn" aria-label="다음">›</button>
-          </div>
+      <div class="hero-right">
+        <div class="card mini">
+          <h3>우리가 잘하는 것</h3>
+          <ul>
+            <li><span class="dot"></span><div><b>정기청소</b> (병원·치과·사무실·공용부) — 일정/품질 고정</div></li>
+            <li><span class="dot"></span><div><b>입주·이사 청소</b> — 먼지/찌든때/욕실 집중</div></li>
+            <li><span class="dot"></span><div><b>특수청소</b> — 상황 맞춤(오염/냄새/리셋)</div></li>
+          </ul>
         </div>
 
-        <div class="frame">
-          <img id="mainImg" src="사진/photo01.jpg" alt="현장 사진" />
+        <div class="card contactbox">
+          <div class="phone">
+            <span>상담/문의</span>
+            <span>010-2063-9495</span>
+          </div>
+          <div class="small">
+            * 견적 문의 시 <b>현장 사진 3~5장</b> 또는 <b>평수/방문 가능 시간</b>을 주시면 더 빠르게 안내드려요.<br/>
+            * 원주/혁신도시/기업도시 인근 우선 진행
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h3 class="section-title" id="services">서비스</h3>
+    <section class="grid">
+      <div class="card service">
+        <h4>병원·치과 정기청소</h4>
+        <p>진료 동선/대기 공간/화장실/공용부 중심으로 <b>위생 기준</b>에 맞춰 관리합니다.</p>
+        <div class="tags">
+          <span class="tag">대기실/복도</span>
+          <span class="tag">화장실</span>
+          <span class="tag">바닥 관리</span>
+          <span class="tag">정기 출입</span>
+        </div>
+      </div>
+
+      <div class="card service">
+        <h4>사무실 정기청소</h4>
+        <p>바닥/책상 주변/휴게실/탕비실 등 업무에 방해되지 않게 <b>조용히</b> 진행합니다.</p>
+        <div class="tags">
+          <span class="tag">바닥/카펫</span>
+          <span class="tag">유리/출입문</span>
+          <span class="tag">탕비실</span>
+          <span class="tag">쓰레기 분리</span>
+        </div>
+      </div>
+
+      <div class="card service">
+        <h4>빌라·아파트 공용부</h4>
+        <p>계단/복도/현관/분리수거장 등 주민 동선 중심으로 <b>깔끔하게 유지</b>합니다.</p>
+        <div class="tags">
+          <span class="tag">계단/복도</span>
+          <span class="tag">분리수거장</span>
+          <span class="tag">출입구</span>
+          <span class="tag">정기 관리</span>
+        </div>
+      </div>
+    </section>
+
+    <h3 class="section-title" id="gallery">대표 갤러리</h3>
+    <section class="card gallery-wrap">
+      <div class="gallery-top">
+        <div>
+          <b>현장 사진 (대표)</b>
+          <p>대표 사진은 로딩 속도를 위해 일부만 보여줍니다. 아래 “갤러리 전체”에서 더 확인하세요.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="frame" id="heroFrame">
+          <img id="heroImg" src="사진/photo01.jpg" alt="대표 작업 사진">
           <div class="caption">
-            <div class="small" id="capSmall">사무실 청소 작업 사진</div>
-            <div class="name" id="capName">photo01.jpg</div>
+            <span id="heroTitle">사무실 정기청소</span>
+            <span style="color:var(--muted)" id="heroCount">1 / 12</span>
           </div>
         </div>
 
         <div class="thumbs" id="thumbs"></div>
-        <div class="dots" id="dots"></div>
-
-        <div class="hint">※ “Before/After”가 아니라, 실제 유지관리 느낌을 보여드리는 현장 실사입니다.</div>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services">
-      <div class="section-title">서비스</div>
-      <div class="services">
-        <div class="svc">
-          <div class="t">사무실 정기청소 <span>정기</span></div>
-          <p>바닥·책상 주변·공용공간·휴게공간을 동선 기준으로 정리해 쌓이지 않게 관리합니다.</p>
+    <!-- Full Gallery -->
+    <section class="card" style="margin-top:18px" id="full-gallery">
+      <div class="clients">
+        <h3>갤러리 전체</h3>
+        <p style="margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.55">
+          현장 종류별로 골라볼 수 있게 정리했습니다. (사무실/빌라/아파트 공용부/병원/치과)
+        </p>
+        <div class="filters" id="filters">
+          <button class="fbtn active" data-filter="all">전체</button>
+          <button class="fbtn" data-filter="사무실">사무실</button>
+          <button class="fbtn" data-filter="빌라">빌라</button>
+          <button class="fbtn" data-filter="아파트">아파트</button>
+          <button class="fbtn" data-filter="병원">병원</button>
+          <button class="fbtn" data-filter="치과">치과</button>
         </div>
-        <div class="svc">
-          <div class="t">병원·의원 청소 <span>동선</span></div>
-          <p>대기실/진료실/복도/화장실 등 고객 동선에 맞춰 “깔끔함이 유지되는 느낌”을 만듭니다.</p>
-        </div>
-        <div class="svc">
-          <div class="t">입주청소·바닥관리 <span>세팅</span></div>
-          <p>초도 청소(처음 세팅) + 정기관리로 연결해 공간 컨디션을 안정적으로 유지합니다.</p>
-        </div>
+
+        <div class="fullgrid" id="fullGrid"></div>
       </div>
     </section>
 
-    <!-- CLIENTS + CONTACT -->
-    <section class="split">
-      <div class="card pad" id="clients">
-        <div class="clients-head">
-            <div class="section-title" style="margin:0">거래처 일부</div>
-          </div>
-          <button class="toggle" id="toggleClients">눌러서 펼치기</button>
-        </div>
-
-        <div class="clients-grid" id="clientsGrid" style="display:none"></div>
-
-      <div class="card pad" id="contact">
-        <div class="section-title" style="margin:0">문의</div>
-        <div class="contact">
-          <div class="svc" style="margin:0">
-            <div class="t">원주 프리미엄 클리닝 <span>상담</span></div>
-            <div class="big">010-2063-9495</div>
-            <p class="small">방문 견적 또는 사진(면도)으로도 상담 가능합니다.</p>
-            <div class="cta" style="margin-top:12px">
-              <a class="btn primary" href="tel:010-2063-9495">지금 전화하기</a>
-              <a class="btn" href="#gallery">갤러리 다시보기</a>
-            </div>
-          </div>
-          <div class="svc" style="margin:0">
-            <div class="t">빠른 견적을 위해 <span>3가지</span></div>
-            <p class="small" style="margin-top:10px">
-              아래 3가지만 알려주시면 더 빠릅니다.<br/><br/>
-              • 공간 종류(사무실/병원/상가 등) + 대략 면적<br/>
-              • 청소 주기(주 1~3회 등) + 희망 시간대<br/>
-              • 특이사항(화장실/계단/유리창/초도청소 필요 여부)
-            </p>
-          </div>
-        </div>
+    <h3 class="section-title" id="clients">거래처</h3>
+    <section class="card clients">
+      <b>현재 관리 중인 업종(일부)</b>
+      <div class="clientlist">
+        <div class="chip"><b>물류</b> <span>물류센터 사무실</span></div>
+        <div class="chip"><b>병원</b> <span>재활/정형 관련</span></div>
+        <div class="chip"><b>치과</b> <span>소아치과</span></div>
+        <div class="chip"><b>주거</b> <span>빌라 공용부</span></div>
+        <div class="chip"><b>주거</b> <span>소형 아파트 공용부</span></div>
       </div>
+      <p class="small" style="margin-top:10px">
+        * 거래처 명칭은 개인정보/계약상 사유로 구체 표기는 생략합니다. 업종 기준으로만 자연스럽게 안내드립니다.
+      </p>
     </section>
 
-    <div class="footer">© 원주 프리미엄 클리닝. All rights reserved.</div>
+    <footer>
+      <div>© 원주 프리미엄 클리닝</div>
+      <div>문의: 010-2063-9495</div>
+      <div style="margin-top:6px">* 사진은 현장 상황/조명에 따라 차이가 있을 수 있습니다. (용량 최적화 처리됨)</div>
+    </footer>
   </main>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-card">
+      <div class="lb-top">
+        <div class="lb-title" id="lbTitle">사진</div>
+        <button class="lb-close" id="lbClose">닫기 ✕</button>
+      </div>
+      <div class="lb-imgwrap">
+        <img id="lbImg" src="" alt="확대 이미지">
+      </div>
+      <div class="lb-bottom">
+        <div id="lbMeta">—</div>
+        <div class="lb-nav">
+          <button id="lbPrev">◀</button>
+          <button id="lbNext">▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    /* =========================
-       1) 갤러리 (슬라이드)
-       - photo01.jpg ~ photo08.jpg 를 기본으로 사용
-       ========================= */
-    const GALLERY = [
-      {src:"사진/photo01.jpg", small:"사무실 청소 작업 사진", name:"photo01.jpg"},
-      {src:"사진/photo02.jpg", small:"사무실/회의실 공간", name:"photo02.jpg"},
-      {src:"사진/photo03.jpg", small:"바닥·동선 유지관리", name:"photo03.jpg"},
-      {src:"사진/photo04.jpg", small:"현장 작업 사진", name:"photo04.jpg"},
-      {src:"사진/photo05.jpg", small:"현장 작업 사진", name:"photo05.jpg"},
-      {src:"사진/photo06.jpg", small:"현장 작업 사진", name:"photo06.jpg"},
-      {src:"사진/photo07.jpg", small:"현장 작업 사진", name:"photo07.jpg"},
-      {src:"사진/photo08.jpg", small:"현장 작업 사진", name:"photo08.jpg"},
+    // ===== Featured gallery =====
+    const galleryFeatured = [
+      { src: '사진/photo01.jpg', thumb: '사진/thumbs/photo01.jpg', title: '사무실 정기청소', cat:'사무실' },
+      { src: '사진/photo02.jpg', thumb: '사진/thumbs/photo02.jpg', title: '사무실 바닥/책상 정리', cat:'사무실' },
+      { src: '사진/photo03.jpg', thumb: '사진/thumbs/photo03.jpg', title: '사무실 공용부', cat:'사무실' },
+      { src: '사진/villa03.jpg', thumb: '사진/thumbs/villa03.jpg', title: '빌라 공용부', cat:'빌라' },
+      { src: '사진/villa06.jpg', thumb: '사진/thumbs/villa06.jpg', title: '빌라 계단/복도', cat:'빌라' },
+      { src: '사진/recycle03.jpg', thumb: '사진/thumbs/recycle03.jpg', title: '아파트 분리수거장', cat:'아파트' },
+      { src: '사진/hospital02.jpg', thumb: '사진/thumbs/hospital02.jpg', title: '병원 복도', cat:'병원' },
+      { src: '사진/dental04.jpg', thumb: '사진/thumbs/dental04.jpg', title: '치과 대기공간', cat:'치과' },
+      { src: '사진/dental01.jpg', thumb: '사진/thumbs/dental01.jpg', title: '치과 외부/입구', cat:'치과' },
+      { src: '사진/dental06.jpg', thumb: '사진/thumbs/dental06.jpg', title: '치과 진료실', cat:'치과' },
+      { src: '사진/hospital04.jpg', thumb: '사진/thumbs/hospital04.jpg', title: '병원 복도(공용부)', cat:'병원' },
+      { src: '사진/villa10.jpg', thumb: '사진/thumbs/villa10.jpg', title: '빌라 현장', cat:'빌라' },
     ];
 
-    let idx = 0;
-    const mainImg = document.getElementById("mainImg");
-    const capSmall = document.getElementById("capSmall");
-    const capName = document.getElementById("capName");
-    const thumbs = document.getElementById("thumbs");
-    const dots = document.getElementById("dots");
+    const heroImg = document.getElementById('heroImg');
+    const heroTitle = document.getElementById('heroTitle');
+    const heroCount = document.getElementById('heroCount');
+    const thumbs = document.getElementById('thumbs');
+
+    let current = 0;
+    function setHero(idx){
+      current = idx;
+      const item = galleryFeatured[idx];
+      heroImg.src = item.src;
+      heroTitle.textContent = item.title + ' · ' + item.cat;
+      heroCount.textContent = `${idx+1} / ${galleryFeatured.length}`;
+      [...thumbs.children].forEach((t,i)=>t.style.outline = i===idx ? '2px solid rgba(122,162,255,.75)' : 'none');
+    }
 
     function renderThumbs(){
-      thumbs.innerHTML = "";
-      dots.innerHTML = "";
-      GALLERY.forEach((g, i) => {
-        const t = document.createElement("div");
-        t.className = "thumb" + (i===idx ? " active":"");
-        t.innerHTML = `<img src="${g.src}" alt="썸네일 ${i+1}">`;
-        t.addEventListener("click", ()=> setSlide(i));
-        thumbs.appendChild(t);
-
-        const d = document.createElement("div");
-        d.className = "dot2" + (i===idx ? " active":"");
-        d.addEventListener("click", ()=> setSlide(i));
-        dots.appendChild(d);
+      thumbs.innerHTML = '';
+      galleryFeatured.forEach((g, i)=>{
+        const div = document.createElement('div');
+        div.className = 'thumb';
+        div.innerHTML = `<img src="${g.thumb}" alt="${g.title}">`;
+        div.addEventListener('click', ()=> setHero(i));
+        thumbs.appendChild(div);
       });
+      setHero(0);
     }
 
-    function setSlide(i){
-      idx = (i + GALLERY.length) % GALLERY.length;
-      const g = GALLERY[idx];
-      mainImg.src = g.src;
-      capSmall.textContent = g.small;
-      capName.textContent = g.name;
-      renderThumbs();
-    }
+    renderThumbs();
 
-    document.getElementById("prevBtn").addEventListener("click", ()=> setSlide(idx-1));
-    document.getElementById("nextBtn").addEventListener("click", ()=> setSlide(idx+1));
+    // Auto slide
+    setInterval(()=>{
+      const next = (current + 1) % galleryFeatured.length;
+      setHero(next);
+    }, 4500);
 
-    // 자동 슬라이드(원하면 꺼도 됨)
-    let auto = setInterval(()=> setSlide(idx+1), 4500);
-    mainImg.addEventListener("mouseenter", ()=> clearInterval(auto));
-    mainImg.addEventListener("mouseleave", ()=> auto = setInterval(()=> setSlide(idx+1), 4500));
+    // ===== Full gallery =====
+    const galleryAll = [
+      // Existing office photos
+      {src:'사진/photo01.jpg', thumb:'사진/thumbs/photo01.jpg', title:'사무실 정기청소', cat:'사무실'},
+      {src:'사진/photo02.jpg', thumb:'사진/thumbs/photo02.jpg', title:'사무실 바닥/책상 정리', cat:'사무실'},
+      {src:'사진/photo03.jpg', thumb:'사진/thumbs/photo03.jpg', title:'사무실 공용부', cat:'사무실'},
+      {src:'사진/photo04.jpg', thumb:'사진/thumbs/photo04.jpg', title:'사무실 공용부', cat:'사무실'},
+      {src:'사진/photo05.jpg', thumb:'사진/thumbs/photo05.jpg', title:'사무실 정리', cat:'사무실'},
 
-    /* =========================
-       2) 거래처 일부: 자연스러운 마스킹 + 업종 태그
-       ========================= */
+      // Villa (11)
+      {src:'사진/villa01.jpg', thumb:'사진/thumbs/villa01.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa02.jpg', thumb:'사진/thumbs/villa02.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa03.jpg', thumb:'사진/thumbs/villa03.jpg', title:'빌라 공용부', cat:'빌라'},
+      {src:'사진/villa04.jpg', thumb:'사진/thumbs/villa04.jpg', title:'빌라 공용부', cat:'빌라'},
+      {src:'사진/villa05.jpg', thumb:'사진/thumbs/villa05.jpg', title:'빌라 계단/복도', cat:'빌라'},
+      {src:'사진/villa06.jpg', thumb:'사진/thumbs/villa06.jpg', title:'빌라 계단/복도', cat:'빌라'},
+      {src:'사진/villa07.jpg', thumb:'사진/thumbs/villa07.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa08.jpg', thumb:'사진/thumbs/villa08.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa09.jpg', thumb:'사진/thumbs/villa09.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa10.jpg', thumb:'사진/thumbs/villa10.jpg', title:'빌라 현장', cat:'빌라'},
+      {src:'사진/villa11.jpg', thumb:'사진/thumbs/villa11.jpg', title:'빌라 현장', cat:'빌라'},
 
-    // ✅ 마스킹: 길이별 자연화
-    // - 2~3글자: 첫 글자만 노출 (예: "유림" -> "유○")
-    // - 4~5글자: 앞 1 + 뒤 1 노출 (예: "유림빌딩" -> "유○○딩")
-    // - 6글자 이상: 앞 2 + 뒤 1 노출 (예: "지성정형외과" -> "지성○○○과")
-    function maskNameNatural(name){
-      const s = String(name || "").trim();
-      const n = s.length;
-      if (n <= 1) return s;
+      // Apartment recycling (4)
+      {src:'사진/recycle01.jpg', thumb:'사진/thumbs/recycle01.jpg', title:'아파트 분리수거장', cat:'아파트'},
+      {src:'사진/recycle02.jpg', thumb:'사진/thumbs/recycle02.jpg', title:'아파트 분리수거장', cat:'아파트'},
+      {src:'사진/recycle03.jpg', thumb:'사진/thumbs/recycle03.jpg', title:'아파트 분리수거장', cat:'아파트'},
+      {src:'사진/recycle04.jpg', thumb:'사진/thumbs/recycle04.jpg', title:'아파트 공용부', cat:'아파트'},
 
-      if (n <= 3) {
-        return s[0] + "○".repeat(n-1);
-      }
-      if (n <= 5) {
-        return s[0] + "○".repeat(n-2) + s[n-1];
-      }
-      return s.slice(0,2) + "○".repeat(n-3) + s[n-1];
-    }
+      // Hospital (5)
+      {src:'사진/hospital01.jpg', thumb:'사진/thumbs/hospital01.jpg', title:'병원 복도', cat:'병원'},
+      {src:'사진/hospital02.jpg', thumb:'사진/thumbs/hospital02.jpg', title:'병원 복도', cat:'병원'},
+      {src:'사진/hospital03.jpg', thumb:'사진/thumbs/hospital03.jpg', title:'병원 병실', cat:'병원'},
+      {src:'사진/hospital04.jpg', thumb:'사진/thumbs/hospital04.jpg', title:'병원 공용부', cat:'병원'},
+      {src:'사진/hospital05.jpg', thumb:'사진/thumbs/hospital05.jpg', title:'병원 복도', cat:'병원'},
 
-    // ✅ 업종 분류(키워드 기반)
-    function classifyType(name){
-      const s = String(name || "");
-
-      // 병원/의원/의학
-      if (/(병원|의원|정형외과|내과|피부과|안과|산부인과|한의원)/.test(s)) return {label:"병원", cls:"hospital", note:"의료기관 정기/특수 동선 관리"};
-
-      // 치과
-      if (/(치과)/.test(s)) return {label:"치과", cls:"hospital", note:"대기실·진료실·화장실 중심 관리"};
-
-      // 금융(금고/협동조합)
-      if (/(새마을금고|신용협동조합|농협|수협|금고|협동조합)/.test(s)) return {label:"금융", cls:"fin", note:"고객 응대 공간 위주 깔끔 유지"};
-
-      // 카페/프랜차이즈
-      if (/(투썸|커피|카페)/.test(s)) return {label:"카페", cls:"company", note:"바닥·테이블·동선 중심 관리"};
-
-      // 아파트/빌라/주거단지
-      if (/(아파트|빌라|주공|주택|오피스텔)/.test(s)) return {label:"주거", cls:"building", note:"공용부/계단/현관 동선 관리"};
-
-      // 빌딩
-      if (/(빌딩)/.test(s)) return {label:"빌딩", cls:"building", note:"공용부 중심 관리"};
-
-      // 물류
-      if (/(로지스|물류|센터)/.test(s)) return {label:"물류", cls:"logistics", note:"넓은 바닥·먼지 관리"};
-
-      // (주), 주식회사 등 기업
-      if (/(주식회사|\(주\)|회사|산업|코앤코|공간산업)/.test(s)) return {label:"기업", cls:"company", note:"사무실/창고 혼합 동선 관리"};
-
-      // 기본
-      return {label:"관리", cls:"company", note:"공간 특성에 맞춘 정기관리"};
-    }
-
-    // ✅ 풀네임 그대로 입력 (화면에는 자동 마스킹)
-    const CLIENTS_FULL = [
-      "지성정형외과",
-      "부론제일병원",
-      "다람쥐키즈치과",
-      "코앤코주식회사",
-      "공간산업주식회사",
-      "유림빌딩",
-      "MG새마을금고본점",
-      "신용협동조합본점",
-      "투썸플레이스지점",
-      "예가채빌라아파트",
-      "성우아파트",
-      "센트럴로지스",
-      "서울니어치과",
-      "유디치과지점",
-      "산림협동조합본점"
+      // Dental (7)
+      {src:'사진/dental01.jpg', thumb:'사진/thumbs/dental01.jpg', title:'치과 외부/입구', cat:'치과'},
+      {src:'사진/dental02.jpg', thumb:'사진/thumbs/dental02.jpg', title:'치과 안내/입구', cat:'치과'},
+      {src:'사진/dental03.jpg', thumb:'사진/thumbs/dental03.jpg', title:'치과 데스크', cat:'치과'},
+      {src:'사진/dental04.jpg', thumb:'사진/thumbs/dental04.jpg', title:'치과 대기공간', cat:'치과'},
+      {src:'사진/dental05.jpg', thumb:'사진/thumbs/dental05.jpg', title:'치과 손씻는 공간', cat:'치과'},
+      {src:'사진/dental06.jpg', thumb:'사진/thumbs/dental06.jpg', title:'치과 진료실', cat:'치과'},
+      {src:'사진/dental07.jpg', thumb:'사진/thumbs/dental07.jpg', title:'치과 진료실', cat:'치과'},
     ];
 
-    function renderClients(){
-      const grid = document.getElementById("clientsGrid");
-      grid.innerHTML = "";
+    const fullGrid = document.getElementById('fullGrid');
+    const filterWrap = document.getElementById('filters');
+    const filterBtns = [...filterWrap.querySelectorAll('.fbtn')];
 
-      CLIENTS_FULL.forEach((full) => {
-        const masked = maskNameNatural(full);
-        const type = classifyType(full);
+    // Lightbox elements
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbMeta = document.getElementById('lbMeta');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
 
-        const el = document.createElement("div");
-        el.className = "client-card";
-        el.innerHTML = `
-          <div class="client-top">
-            <div class="client-name">${masked}</div>
-            <div class="tag ${type.cls}">${type.label}</div>
-          </div>
-          <div class="client-sub">${type.note}</div>
-        `;
-        grid.appendChild(el);
+    let filtered = [...galleryAll];
+    let lbIndex = 0;
+
+    function renderFullGrid(){
+      fullGrid.innerHTML = '';
+      filtered.forEach((g, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'gitem';
+        div.innerHTML = `
+          <img src="${g.thumb}" alt="${g.title}">
+          <div class="gmeta">
+            <div class="t">${g.title}</div>
+            <div class="c">${g.cat}</div>
+          </div>`;
+        div.addEventListener('click', ()=> openLightbox(idx));
+        fullGrid.appendChild(div);
       });
     }
 
-    // 접기/펼치기
-    const toggleBtn = document.getElementById("toggleClients");
-    const clientsGrid = document.getElementById("clientsGrid");
-    let opened = false;
-    toggleBtn.addEventListener("click", () => {
-      opened = !opened;
-      clientsGrid.style.display = opened ? "grid" : "none";
-      toggleBtn.textContent = opened ? "눌러서 접기" : "눌러서 펼치기";
+    function setFilter(cat){
+      filtered = (cat==='all') ? [...galleryAll] : galleryAll.filter(x=>x.cat===cat);
+      renderFullGrid();
+    }
+
+    filterBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        filterBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        setFilter(btn.dataset.filter);
+      });
     });
 
-    // 초기 렌더
-    document.addEventListener("DOMContentLoaded", () => {
-      setSlide(0);
-      renderClients();
+    function openLightbox(idx){
+      lbIndex = idx;
+      const g = filtered[lbIndex];
+      lbImg.src = g.src;
+      lbTitle.textContent = `${g.title} · ${g.cat}`;
+      lbMeta.textContent = `${lbIndex+1} / ${filtered.length}`;
+      lb.classList.add('open');
+    }
+    function closeLightbox(){ lb.classList.remove('open'); }
+    function navLightbox(dir){
+      if(!filtered.length) return;
+      lbIndex = (lbIndex + dir + filtered.length) % filtered.length;
+      openLightbox(lbIndex);
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLightbox(); });
+    lbPrev.addEventListener('click', ()=> navLightbox(-1));
+    lbNext.addEventListener('click', ()=> navLightbox(1));
+    window.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key==='Escape') closeLightbox();
+      if(e.key==='ArrowLeft') navLightbox(-1);
+      if(e.key==='ArrowRight') navLightbox(1);
     });
+
+    // initial
+    renderFullGrid();
   </script>
 </body>
 </html>
