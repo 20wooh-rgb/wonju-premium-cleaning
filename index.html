@@ -1,112 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>원주 프리미엄 클리닝</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-      background: #f5f6f7;
-      color: #222;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 48px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 15px;
-      color: #ccc;
-    }
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 50px 20px;
-    }
-    h2 {
-      margin-bottom: 20px;
-      font-size: 22px;
-      border-left: 4px solid #111;
-      padding-left: 10px;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .service-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      text-align: center;
-      font-weight: 500;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      background: #fff;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 13px;
-      color: #666;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>원주 프리미엄 청소 | 작업 갤러리</title>
+  <meta name="description" content="사무실, 공장, 물류센터, 반도체, 화장실, 공용부 등 현장 맞춤 청소 작업 갤러리." />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
-<header>
-  <h1>원주 프리미엄 클리닝</h1>
-  <p>병원 · 사무실 · 계단 · 상가 전문 청소</p>
+<header class="header">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">원주 프리미엄 청소</div>
+      <div class="sub">현장별 작업 사진 갤러리</div>
+    </div>
+    <div class="cta">
+      <a class="btn" href="tel:010-2063-9495">상담 010-2063-9495</a>
+    </div>
+  </div>
 </header>
 
-<section>
-  <h2>제공 서비스</h2>
-  <div class="services">
-    <div class="service-box">병원 / 의료시설 청소</div>
-    <div class="service-box">사무실 · 공장동 청소</div>
-    <div class="service-box">아파트 · 빌라 계단 청소</div>
-    <div class="service-box">상가 · 공용공간 관리</div>
+<main class="wrap">
+  <section class="hero">
+    <h1>카테고리별 작업 사례</h1>
+    <p>사진은 계속 추가됩니다. <b>물류센터 전경</b>은 추후 업데이트 예정입니다.</p>
+  </section>
+
+  <section class="controls" aria-label="카테고리 선택">
+    <div id="filters" class="filters"></div>
+    <div class="search">
+      <input id="search" type="search" placeholder="검색 (예: 화장실, 사무실)" autocomplete="off" />
+    </div>
+  </section>
+
+  <section id="emptyNotice" class="notice hidden"></section>
+
+  <section id="grid" class="grid" aria-label="갤러리"></section>
+
+  <section class="howto">
+    <h2>사진 추가하는 방법 (나중에)</h2>
+    <ol>
+      <li><b>images/full</b>과 <b>images/thumb</b>에 동일한 파일명을 넣고,</li>
+      <li><b>data/gallery.json</b>에 항목을 1줄 추가하면 자동으로 반영됩니다.</li>
+    </ol>
+    <p class="muted">원하시면 “사진만 넣으면 자동 반영”되도록 폴더 스캔해서 gallery.json을 만드는 스크립트도 같이 넣어드렸습니다.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>© 원주 프리미엄 청소</div>
+    <div class="muted">상담/견적: 010-2063-9495</div>
   </div>
-</section>
-
-<section>
-  <h2>작업 사례 (대표)</h2>
-  <div class="gallery">
-    <!-- 치과 -->
-    <img src="pair_dental_01.jpg" alt="치과 청소 작업 사례">
-
-    <!-- 사무실 -->
-    <img src="pair_office1.jpg" alt="사무실 청소 작업 사례">
-    <img src="pair_office2.jpg" alt="사무실 청소 작업 사례">
-
-    <!-- 계단 -->
-    <img src="pair_stair.jpg" alt="계단 청소 작업 사례">
-
-    <!-- 공장동 사무실 -->
-    <img src="office_factory_02_after.jpg" alt="공장동 사무실 청소 작업 사례">
-  </div>
-</section>
-
-<footer>
-  © 원주 프리미엄 클리닝
 </footer>
 
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
+  <button id="lbClose" class="lb-close" aria-label="닫기">×</button>
+  <button id="lbPrev" class="lb-nav lb-prev" aria-label="이전">‹</button>
+  <button id="lbNext" class="lb-nav lb-next" aria-label="다음">›</button>
+  <div class="lb-content">
+    <img id="lbImg" alt="" />
+    <div class="lb-caption">
+      <div id="lbTitle" class="lb-title"></div>
+      <div id="lbMeta" class="lb-meta"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
 </body>
 </html>
