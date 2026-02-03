@@ -1,85 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>원주 프리미엄 클리닝</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>원주 프리미엄 클리닝 | 작업 사례 갤러리</title>
   <style>
-    body {
-      margin: 0;
-      font-family: "Noto Sans KR", Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
-    header {
-      background: #1f2937;
-      color: #fff;
-      padding: 30px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: 1px;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 15px;
-      opacity: 0.9;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-      background: #fff;
-    }
-    footer {
-      background: #111827;
-      color: #ddd;
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
-    }
+    :root{--bg:#f6f7f9;--card:#fff;--text:#111;--muted:#666;--line:#e6e8ee;--brand:#111;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;background:var(--bg);color:var(--text)}
+    header{background:var(--brand);color:#fff;padding:28px 16px}
+    header .wrap{max-width:1100px;margin:0 auto}
+    h1{margin:0;font-size:28px;letter-spacing:-.5px}
+    .sub{margin-top:6px;color:#d9d9d9;font-size:14px}
+    main{max-width:1100px;margin:0 auto;padding:18px 16px 40px}
+    .section{margin-top:18px}
+    .section h2{font-size:18px;margin:0 0 10px}
+    .hint{font-size:13px;color:var(--muted);margin:0 0 14px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    @media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#ddd}
+    .cap{padding:10px 10px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+    .topbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;cursor:pointer}
+    .btn[aria-pressed="true"]{background:#111;color:#fff;border-color:#111}
+    .note{color:var(--muted);font-size:12px}
   </style>
 </head>
 <body>
+  <header>
+    <div class="wrap">
+      <h1>원주 프리미엄 클리닝</h1>
+      <div class="sub">병원 · 사무실 · 계단 · 상가 전문 청소 | 작업 사례 갤러리</div>
+    </div>
+  </header>
 
-<header>
-  <h1>원주 프리미엄 클리닝</h1>
-  <p>병원 · 사무실 · 계단 · 상가 전문 청소</p>
-</header>
+  <main>
+    <div class="section">
+      <h2>작업 사례 갤러리</h2>
+      <p class="hint">업로드된 사진을 자동으로 불러옵니다. (헷갈리는 비포/애프터는 따로 안 묶습니다)</p>
 
-<section>
-  <h2>작업 사례 갤러리</h2>
-  <div class="gallery">
-    <!-- 사진 파일명은 네가 올린 그대로 사용됨 -->
-    <img src="KakaoTalk_20240610_133745501.jpg" alt="청소 작업 사진">
-    <img src="KakaoTalk_20240610_133745501_02.jpg" alt="청소 작업 사진">
-    <img src="KakaoTalk_20240622_134254754.jpg" alt="청소 작업 사진">
-    <img src="KakaoTalk_20240622_134254754_01.jpg" alt="청소 작업 사진">
-    <img src="KakaoTalk_20240622_134254754_02.jpg" alt="청소 작업 사진">
-  </div>
-</section>
+      <div class="topbar">
+        <button class="btn" id="btnAll" aria-pressed="true">전체</button>
+        <button class="btn" id="btnJpg" aria-pressed="false">JPG만</button>
+        <button class="btn" id="btnPng" aria-pressed="false">PNG만</button>
+        <span class="note" id="status">불러오는 중…</span>
+      </div>
 
-<footer>
-  <div>원주 프리미엄 클리닝</div>
-  <div>상담 문의 : 010-2063-9495</div>
-</footer>
+      <div class="grid" id="gallery"></div>
+    </div>
+  </main>
 
+  <script>
+    // ✅ 여기만 맞으면 자동으로 전부 뜹니다.
+    const OWNER = "20wooh-rgb";
+    const REPO  = "wonju-premium-cleaning";
+    const BRANCH = "main";
+
+    // 사진이 루트에 올라간 경우 path=""
+    // 만약 사진/ 폴더 안에만 올렸다면 path="사진"
+    const PATHS = ["", "사진"]; // 둘 다 시도해서 있는 것만 불러옵니다.
+
+    const gal = document.getElementById("gallery");
+    const statusEl = document.getElementById("status");
+
+    let allImages = [];
+    let filterMode = "all"; // all | jpg | png
+
+    async function fetchDir(path){
+      const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`;
+      const res = await fetch(url);
+      if(!res.ok) return []; // 폴더 없으면 그냥 빈 배열
+      const data = await res.json();
+      if(!Array.isArray(data)) return [];
+      return data;
+    }
+
+    function toImageUrl(item){
+      // GitHub Pages 기준 상대경로
+      // 루트 파일이면 "파일명", 사진폴더면 "사진/파일명"
+      if(!item || !item.name) return null;
+      const ext = item.name.toLowerCase();
+      if(!(ext.endsWith(".jpg") || ext.endsWith(".jpeg") || ext.endsWith(".png") || ext.endsWith(".webp"))) return null;
+      if(item.path.includes("/")) return item.path; // e.g. "사진/xxx.jpg"
+      return item.name; // e.g. "xxx.jpg"
+    }
+
+    function render(){
+      gal.innerHTML = "";
+      const list = allImages.filter(src=>{
+        const low = src.toLowerCase();
+        if(filterMode==="jpg") return (low.endsWith(".jpg") || low.endsWith(".jpeg"));
+        if(filterMode==="png") return low.endsWith(".png");
+        return true;
+      });
+
+      statusEl.textContent = `총 ${list.length}장 표시 중`;
+
+      list.forEach(src=>{
+        const card = document.createElement("div");
+        card.className="card";
+        card.innerHTML = `
+          <img class="thumb" src="${src}" alt="작업사진" loading="lazy">
+          <div class="cap">${src}</div>
+        `;
+        gal.appendChild(card);
+      });
+    }
+
+    function setPressed(btnId){
+      document.getElementById("btnAll").setAttribute("aria-pressed", btnId==="btnAll");
+      document.getElementById("btnJpg").setAttribute("aria-pressed", btnId==="btnJpg");
+      document.getElementById("btnPng").setAttribute("aria-pressed", btnId==="btnPng");
+    }
+
+    document.getElementById("btnAll").onclick = ()=>{filterMode="all"; setPressed("btnAll"); render();};
+    document.getElementById("btnJpg").onclick = ()=>{filterMode="jpg"; setPressed("btnJpg"); render();};
+    document.getElementById("btnPng").onclick = ()=>{filterMode="png"; setPressed("btnPng"); render();};
+
+    (async function init(){
+      statusEl.textContent = "GitHub에서 사진 목록 불러오는 중…";
+      let items = [];
+      for(const p of PATHS){
+        const dir = await fetchDir(p);
+        items = items.concat(dir);
+      }
+      const imgs = items.map(toImageUrl).filter(Boolean);
+
+      // 이름순 정렬(원하면 최신순으로 바꿀 수 있어요)
+      imgs.sort((a,b)=>a.localeCompare(b));
+
+      allImages = imgs;
+
+      if(allImages.length === 0){
+        statusEl.textContent = "사진을 찾지 못했어요. (루트 또는 사진/ 폴더에 jpg/png가 있는지 확인)";
+      } else {
+        render();
+      }
+    })();
+  </script>
 </body>
 </html>
