@@ -1,73 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>원주 프리미엄 청소 | 작업 갤러리</title>
-  <meta name="description" content="사무실, 공장, 물류센터, 반도체, 화장실, 공용부 등 현장 맞춤 청소 작업 갤러리." />
+  <meta charset="UTF-8" />
+  <title>원주 프리미엄 청소 | 작업 사례 갤러리</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-<header class="header">
-  <div class="wrap">
-    <div class="brand">
-      <div class="logo">원주 프리미엄 청소</div>
-      <div class="sub">현장별 작업 사진 갤러리</div>
-    </div>
-    <div class="cta">
-      <a class="btn" href="tel:010-2063-9495">상담 010-2063-9495</a>
-    </div>
-  </div>
-</header>
+  <header>
+    <h1>원주 프리미엄 청소</h1>
+    <p>작업 사례 갤러리</p>
+  </header>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>카테고리별 작업 사례</h1>
-    <p>사진은 계속 추가됩니다. <b>물류센터 전경</b>은 추후 업데이트 예정입니다.</p>
-  </section>
+  <nav class="tabs">
+    <button data-cat="dental" class="active">치과</button>
+    <button data-cat="office">사무실</button>
+    <button data-cat="factory">공장</button>
+    <button data-cat="semiconductor">반도체</button>
+    <button data-cat="public">공공시설</button>
+  </nav>
 
-  <section class="controls" aria-label="카테고리 선택">
-    <div id="filters" class="filters"></div>
-    <div class="search">
-      <input id="search" type="search" placeholder="검색 (예: 화장실, 사무실)" autocomplete="off" />
-    </div>
-  </section>
+  <main id="gallery"></main>
 
-  <section id="emptyNotice" class="notice hidden"></section>
-
-  <section id="grid" class="grid" aria-label="갤러리"></section>
-
-  <section class="howto">
-    <h2>사진 추가하는 방법 (나중에)</h2>
-    <ol>
-      <li><b>images/full</b>과 <b>images/thumb</b>에 동일한 파일명을 넣고,</li>
-      <li><b>data/gallery.json</b>에 항목을 1줄 추가하면 자동으로 반영됩니다.</li>
-    </ol>
-    <p class="muted">원하시면 “사진만 넣으면 자동 반영”되도록 폴더 스캔해서 gallery.json을 만드는 스크립트도 같이 넣어드렸습니다.</p>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <div>© 원주 프리미엄 청소</div>
-    <div class="muted">상담/견적: 010-2063-9495</div>
-  </div>
-</footer>
-
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
-  <button id="lbClose" class="lb-close" aria-label="닫기">×</button>
-  <button id="lbPrev" class="lb-nav lb-prev" aria-label="이전">‹</button>
-  <button id="lbNext" class="lb-nav lb-next" aria-label="다음">›</button>
-  <div class="lb-content">
-    <img id="lbImg" alt="" />
-    <div class="lb-caption">
-      <div id="lbTitle" class="lb-title"></div>
-      <div id="lbMeta" class="lb-meta"></div>
-    </div>
-  </div>
-</div>
-
-<script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
