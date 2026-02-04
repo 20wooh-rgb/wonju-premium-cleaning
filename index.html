@@ -5,97 +5,174 @@
   <title>원주 프리미엄 청소 | 작업 사례</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      margin: 0;
-      background: #111;
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    :root{
+      --bg:#111; --fg:#fff; --muted:#bbb; --line:#333; --accent:#4da3ff;
     }
-    h1 {
-      text-align: center;
-      margin: 28px 0 8px;
-      font-size: 22px;
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont;
     }
-    h2 {
-      margin: 26px 16px 10px;
-      font-size: 18px;
-      border-left: 4px solid #888;
-      padding-left: 10px;
+    a{color:inherit; text-decoration:none}
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(17,17,17,.95); backdrop-filter:saturate(120%) blur(2px);
+      border-bottom:1px solid var(--line);
     }
-    .desc {
-      text-align: center;
-      font-size: 14px;
-      color: #bbb;
-      margin-bottom: 20px;
+    .top{
+      max-width:1200px; margin:0 auto; padding:14px 16px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      padding: 0 16px 20px;
+    .brand h1{margin:0; font-size:20px}
+    .brand p{margin:4px 0 0; color:var(--muted); font-size:13px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--line); padding:8px 12px; border-radius:8px;
+      font-size:14px; background:#1b1b1b;
     }
-    .item img {
-      width: 100%;
-      border-radius: 8px;
-      display: block;
+    .btn.primary{border-color:var(--accent)}
+    .btn:hover{background:#222}
+
+    .hero{
+      max-width:1200px; margin:16px auto 6px; padding:0 16px;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
     }
-    .label {
-      text-align: center;
-      font-size: 13px;
-      color: #ccc;
-      margin-top: 6px;
+    .hero img{width:100%; border-radius:10px}
+
+    .filters{
+      max-width:1200px; margin:10px auto; padding:0 16px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .filter{
+      padding:7px 12px; border-radius:999px; border:1px solid var(--line);
+      font-size:13px; cursor:pointer; background:#1b1b1b;
+    }
+    .filter.active{border-color:var(--accent)}
+
+    h2{
+      max-width:1200px; margin:24px auto 8px; padding:0 16px;
+      font-size:18px; border-left:4px solid #888; padding-left:10px;
+    }
+    .gallery{
+      max-width:1200px; margin:0 auto; padding:0 16px 20px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .item{display:block}
+    .item img{width:100%; border-radius:10px}
+    .label{text-align:center; font-size:13px; color:#ccc; margin-top:6px}
+
+    footer{
+      border-top:1px solid var(--line); padding:16px; text-align:center;
+      color:var(--muted); font-size:13px;
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
 <body>
 
-<h1>원주 프리미엄 청소 · 작업 사례</h1>
-<div class="desc">사무실 · 공장 · 공용시설 · 병원 청소 사례</div>
+<header>
+  <div class="top">
+    <div class="brand">
+      <h1>원주 프리미엄 청소</h1>
+      <p>사무실 · 공장 · 병원 전문 관리</p>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="tel:01020639495">📞 010-2063-9495</a>
+      <a class="btn" href="https://blog.naver.com/YOURE_BLOG_URL" target="_blank">블로그 보기</a>
+    </div>
+  </div>
+</header>
 
+<!-- 대표 이미지 -->
+<section class="hero">
+  <img src="images/office_01.jpg" alt="">
+  <img src="images/factory_01.jpg" alt="">
+  <img src="images/public_01.jpg" alt="">
+  <img src="images/hospital_common_01.jpg" alt="">
+</section>
+
+<!-- 필터 -->
+<div class="filters">
+  <button class="filter active" data-cat="all">전체</button>
+  <button class="filter" data-cat="office">사무실</button>
+  <button class="filter" data-cat="factory">공장·반도체</button>
+  <button class="filter" data-cat="public">공용시설</button>
+  <button class="filter" data-cat="hospital_common">병원 공용</button>
+  <button class="filter" data-cat="hospital_treatment">진료실</button>
+  <button class="filter" data-cat="dental">치과</button>
+</div>
+
+<!-- 사무실 -->
 <h2>사무실</h2>
 <div class="gallery">
-  <div class="item"><img src="images/office_01.jpg"><div class="label">사무실 청소</div></div>
-  <div class="item"><img src="images/office_02.jpg"><div class="label">사무실 청소</div></div>
-  <div class="item"><img src="images/office_03.jpg"><div class="label">사무실 청소</div></div>
-  <div class="item"><img src="images/office_04.jpg"><div class="label">사무실 청소</div></div>
+  <a class="item" data-cat="office"><img src="images/office_01.jpg"><div class="label">사무실 청소</div></a>
+  <a class="item" data-cat="office"><img src="images/office_02.jpg"><div class="label">사무실 청소</div></a>
+  <a class="item" data-cat="office"><img src="images/office_03.jpg"><div class="label">사무실 청소</div></a>
+  <a class="item" data-cat="office"><img src="images/office_04.jpg"><div class="label">사무실 청소</div></a>
 </div>
 
+<!-- 공장 -->
 <h2>공장 · 반도체</h2>
 <div class="gallery">
-  <div class="item"><img src="images/factory_01.jpg"><div class="label">공장 · 반도체</div></div>
-  <div class="item"><img src="images/factory_02.jpg"><div class="label">공장 · 반도체</div></div>
-  <div class="item"><img src="images/factory_03.jpg"><div class="label">공장 · 반도체</div></div>
+  <a class="item" data-cat="factory"><img src="images/factory_01.jpg"><div class="label">공장 · 반도체</div></a>
+  <a class="item" data-cat="factory"><img src="images/factory_02.jpg"><div class="label">공장 · 반도체</div></a>
+  <a class="item" data-cat="factory"><img src="images/factory_03.jpg"><div class="label">공장 · 반도체</div></a>
 </div>
 
+<!-- 공용 -->
 <h2>공용시설</h2>
 <div class="gallery">
-  <div class="item"><img src="images/public_01.jpg"><div class="label">공용시설</div></div>
-  <div class="item"><img src="images/public_02.jpg"><div class="label">공용시설</div></div>
-  <div class="item"><img src="images/public_03.jpg"><div class="label">공용시설</div></div>
-  <div class="item"><img src="images/public_04.jpg"><div class="label">공용시설</div></div>
+  <a class="item" data-cat="public"><img src="images/public_01.jpg"><div class="label">공용시설</div></a>
+  <a class="item" data-cat="public"><img src="images/public_02.jpg"><div class="label">공용시설</div></a>
+  <a class="item" data-cat="public"><img src="images/public_03.jpg"><div class="label">공용시설</div></a>
+  <a class="item" data-cat="public"><img src="images/public_04.jpg"><div class="label">공용시설</div></a>
 </div>
 
+<!-- 병원 공용 -->
 <h2>병원 공용 공간</h2>
 <div class="gallery">
-  <div class="item"><img src="images/hospital_common_01.jpg"><div class="label">병원 공용</div></div>
-  <div class="item"><img src="images/hospital_common_02.jpg"><div class="label">병원 공용</div></div>
-  <div class="item"><img src="images/hospital_common_03.jpg"><div class="label">병원 공용</div></div>
-  <div class="item"><img src="images/hospital_common_04.jpg"><div class="label">병원 공용</div></div>
+  <a class="item" data-cat="hospital_common"><img src="images/hospital_common_01.jpg"><div class="label">병원 공용</div></a>
+  <a class="item" data-cat="hospital_common"><img src="images/hospital_common_02.jpg"><div class="label">병원 공용</div></a>
+  <a class="item" data-cat="hospital_common"><img src="images/hospital_common_03.jpg"><div class="label">병원 공용</div></a>
+  <a class="item" data-cat="hospital_common"><img src="images/hospital_common_04.jpg"><div class="label">병원 공용</div></a>
 </div>
 
+<!-- 진료 -->
 <h2>진료실 · 검사실</h2>
 <div class="gallery">
-  <div class="item"><img src="images/hospital_treatment_01.jpg"><div class="label">진료 공간</div></div>
-  <div class="item"><img src="images/hospital_treatment_02.jpg"><div class="label">진료 공간</div></div>
-  <div class="item"><img src="images/hospital_treatment_03.jpg"><div class="label">진료 공간</div></div>
+  <a class="item" data-cat="hospital_treatment"><img src="images/hospital_treatment_01.jpg"><div class="label">진료 공간</div></a>
+  <a class="item" data-cat="hospital_treatment"><img src="images/hospital_treatment_02.jpg"><div class="label">진료 공간</div></a>
+  <a class="item" data-cat="hospital_treatment"><img src="images/hospital_treatment_03.jpg"><div class="label">진료 공간</div></a>
 </div>
 
+<!-- 치과 -->
 <h2>치과</h2>
 <div class="gallery">
-  <div class="item"><img src="images/dental_01.jpg"><div class="label">치과 청소</div></div>
-  <div class="item"><img src="images/dental_02.jpg"><div class="label">치과 청소</div></div>
-  <div class="item"><img src="images/dental_03.jpg"><div class="label">치과 청소</div></div>
+  <a class="item" data-cat="dental"><img src="images/dental_01.jpg"><div class="label">치과 청소</div></a>
+  <a class="item" data-cat="dental"><img src="images/dental_02.jpg"><div class="label">치과 청소</div></a>
+  <a class="item" data-cat="dental"><img src="images/dental_03.jpg"><div class="label">치과 청소</div></a>
 </div>
+
+<footer>
+  © 원주 프리미엄 청소 · 상담 010-2063-9495
+</footer>
+
+<script>
+  const btns=[...document.querySelectorAll('.filter')];
+  const items=[...document.querySelectorAll('.item')];
+  btns.forEach(b=>b.onclick=()=>{
+    btns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const c=b.dataset.cat;
+    items.forEach(i=>{
+      i.style.display=(c==='all'||i.dataset.cat===c)?'block':'none';
+    });
+  });
+</script>
 
 </body>
 </html>
