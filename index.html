@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>원주 프리미엄 청소</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8" />
+  <title>원주 프리미엄 청소 | 작업 사례</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+      padding: 16px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>원주 프리미엄 청소</h1>
-  <p>작업 사례 갤러리</p>
-</header>
 
-<nav>
-  <button data-cat="office">사무실</button>
-  <button data-cat="logistics">물류</button>
-  <button data-cat="semiconductor">반도체</button>
-  <button data-cat="hospital">병원</button>
-  <button data-cat="public">공용시설</button>
-</nav>
+<h1>원주 프리미엄 청소 · 작업 사례</h1>
 
-<main id="gallery"></main>
+<div class="gallery">
+  <img src="images/office/office_01.jpg" alt="사무실 청소">
+  <img src="images/office/office_02.jpg" alt="사무실 청소">
+</div>
 
-<script src="assets/app.js"></script>
 </body>
 </html>
